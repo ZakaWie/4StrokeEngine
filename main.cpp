@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>
 
 #include "engine.h"
 
@@ -6,24 +7,28 @@ int main(void){
 
 	int fuelTank = 18000;
 	float inputFuel;
+	float inputAir;
 	int inputAmount;
 	bool running = false;
 
-	Engine ZX6(636,13);
+	Cylinder cylinder1(159,13);
 
 	std::cout << "Chose how rich mix '1' '2' '3'" << std::endl;
 	std::cin >> inputAmount;
 	switch(inputAmount){
-		case 1: 
-			inputFuel = 45;
+		case 1:
+			inputAir = cylinder1.cubiCentimeters;
+			inputFuel = inputAir/10;
 			running = true;
 		break;
-		case 2: 
-			inputFuel = 53;
+		case 2:
+			inputAir = cylinder1.cubiCentimeters;
+			inputFuel = inputAir/13;
 			running = true;
 		break;
 		case 3:
-			inputFuel = 60;
+			inputAir = cylinder1.cubiCentimeters;
+			inputFuel = inputAir/15;
 			running = true;
 		break;
 		default:
@@ -32,11 +37,12 @@ int main(void){
 
 	while(running){
 		fuelTank = fuelTank - inputFuel;
-		ZX6.Intake(inputFuel);
-		ZX6.Compression();
-		ZX6.Ignition();
-		ZX6.Push();
-		if(fuelTank == 0)break;
+		cylinder1.Intake(inputFuel);
+		cylinder1.Compression();
+		cylinder1.Ignition();
+		cylinder1.Push();
+		if(fuelTank <= 0)break;
 	}
+	std::cout << "Out of fuel" << std::endl;
 	return 0;
 }

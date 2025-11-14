@@ -2,7 +2,7 @@
 
 #include "engine.h"
 
-	Engine::Engine(int cubiCentimeters,float compression){
+	Cylinder::Cylinder(int cubiCentimeters,float compression){
 		this->cubiCentimeters = cubiCentimeters;
 		this->compression = compression;
 
@@ -11,24 +11,24 @@
 
 	}
 
-	void Engine::Intake(float fuel){
+	void Cylinder::Intake(float fuel){
 		stroke = 1;
 		air = cubiCentimeters;
 		this->fuel = fuel;
 
 }
-	void Engine::Compression(){
+	void Cylinder::Compression(){
 		stroke = 2;
 		airFuel = air + fuel;
 		airFuel = airFuel/compression;
 
 }
-	void Engine::Ignition(){
+	void Cylinder::Ignition(){
 		stroke = 3;
 		exauhst = airFuel;
 		airFuel = 0;
 }
-	void Engine::Push(){
+	void Cylinder::Push(){
 		stroke = 4;
 		exauhst = 0;
 

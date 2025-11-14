@@ -1,18 +1,18 @@
 #pragma once
 
-class Engine{
+class Cylinder{
 public:
 
-	Engine(int,float);
+	Cylinder(int,float);
 	
 	void Intake(float);
 	void Compression();
 	void Ignition();
 	void Push();
+	int cubiCentimeters;
 
 private:
 
-	int cubiCentimeters;
 	int stroke;
 	int rpm;
 	int exauhst;
