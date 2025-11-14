@@ -1,9 +1,9 @@
 PROG = main.exe 
 
 # detta är h-filer
-DEPS= engine.h
+DEPS= engine.h runCylinder.h
 
-SRC = main.cpp engine.cpp
+SRC = main.cpp engine.cpp runCylinder.cpp
 CFLAGS = -g -std=c++17 -Wall -Werror
 LIBS = 
 CC=g++

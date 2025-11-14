@@ -1,7 +1,10 @@
 #include <iostream>
 #include <chrono>
+#include <thread>
+#include<array>
 
 #include "engine.h"
+#include "runCylinder.h"
 
 int main(void){
 
@@ -35,12 +38,11 @@ int main(void){
 			std::cout << "invalid input" << std::endl;
 	}
 
+
 	while(running){
 		fuelTank = fuelTank - inputFuel;
-		cylinder1.Intake(inputFuel);
-		cylinder1.Compression();
-		cylinder1.Ignition();
-		cylinder1.Push();
+		std::thread c1(runCylinder,&cylinder1,inputFuel);
+		c1.join();
 		if(fuelTank <= 0)break;
 	}
 	std::cout << "Out of fuel" << std::endl;
