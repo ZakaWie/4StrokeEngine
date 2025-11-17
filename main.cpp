@@ -14,23 +14,25 @@ int main(void){
 	int inputAmount;
 	bool running = false;
 
-	Cylinder cylinder1(159,13);
+	int cylinderAmount = 4;
+
+	Cylinder cylinders[4] = {{159,13},{159,13},{159,13},{159,13}};
 
 	std::cout << "Chose how rich mix '1' '2' '3'" << std::endl;
 	std::cin >> inputAmount;
 	switch(inputAmount){
 		case 1:
-			inputAir = cylinder1.cubiCentimeters;
+			inputAir = cylinders[1].cubiCentimeters;
 			inputFuel = inputAir/10;
 			running = true;
 		break;
 		case 2:
-			inputAir = cylinder1.cubiCentimeters;
+			inputAir = cylinders[1].cubiCentimeters;
 			inputFuel = inputAir/13;
 			running = true;
 		break;
 		case 3:
-			inputAir = cylinder1.cubiCentimeters;
+			inputAir = cylinders[1].cubiCentimeters;
 			inputFuel = inputAir/15;
 			running = true;
 		break;
@@ -40,9 +42,11 @@ int main(void){
 
 
 	while(running){
+		for(int i = 0;i < cylinderAmount;i++){
 		fuelTank = fuelTank - inputFuel;
-		std::thread c1(runCylinder,&cylinder1,inputFuel);
+		std::thread c1(runCylinder,&cylinders[i],inputFuel);
 		c1.join();
+		}
 		if(fuelTank <= 0)break;
 	}
 	std::cout << "Out of fuel" << std::endl;
