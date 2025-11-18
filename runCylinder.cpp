@@ -1,8 +1,9 @@
 #include "engine.h"
-
-void runCylinder(Cylinder* cylinder1,float inputFuel){
-		cylinder1->Intake(inputFuel);
-		cylinder1->Compression();
-		cylinder1->Ignition();
-		cylinder1->Push();
+void runCylinder(Cylinder* cylinder,float* inputFuel){
+	while(*inputFuel){
+		cylinder->Intake(*inputFuel);
+		cylinder->Compression();
+		cylinder->Ignition();
+		cylinder->Push();
 	}
+}
