@@ -10,10 +10,10 @@ public:
 	void Ignition();
 	void Push();
 	int cubiCentimeters;
+	int stroke;
 
 private:
 
-	int stroke;
 	int rpm;
 	int exauhst;
 	//int crankBHP;

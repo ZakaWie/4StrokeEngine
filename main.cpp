@@ -20,6 +20,7 @@ int main(void){
 	int fuelTank = 18000;
 	float inputFuel;
 	float inputAir;
+	float compression = 13.0f;
 	int inputAmount;
 	int inputCc;
 	int cylinderAmount;
@@ -35,7 +36,10 @@ int main(void){
 
 	cylinderCc = inputCc/cylinderAmount;
 
-	std::vector<Cylinder> cylinders = {{cylinderCc,13},{cylinderCc,13},{cylinderCc,13},{cylinderCc,13}};
+	std::vector<Cylinder> cylinders;
+	for(int i = 0; i < cylinderAmount;i++){
+		cylinders.push_back({cylinderCc,compression});
+	}
 
 	std::cout << "Chose how rich mix '1' '2' '3'" << std::endl;
 	std::cin >> inputAmount;
@@ -60,14 +64,19 @@ int main(void){
 	}
 	std::vector<std::thread> runningCylinders;
 
-	for(Cylinder cylinder:cylinders){
-		std::thread c1(runCylinder,&cylinder,&inputFuel);
+	for(unsigned i = 0; i < cylinders.size();i++){
+		std::thread c1(runCylinder,&cylinders[i],&inputFuel);
 		runningCylinders.push_back(move(c1));
 	}
 
 	while(running){
 		for(unsigned i = 0;i<cylinders.size();i++){
 		fuelTank = fuelTank - inputFuel;
+		if(cylinders[i].stroke == 1){
+				std::cout << "hit timing" << std::endl;
+		}else{
+			std::cout << cylinders[i].stroke << std::endl;
+		}
 		}
 		if(fuelTank <= 0){
 			inputFuel = 0;
