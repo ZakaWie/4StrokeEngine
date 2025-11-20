@@ -24,7 +24,6 @@ int main(void){
 	int inputAmount;
 	int inputCc;
 	int cylinderAmount;
-	int cylinderCc;
 
 	bool running = false;
 
@@ -34,11 +33,11 @@ int main(void){
 	std::cout << "Cylinder amount" << std::endl;
 	std::cin >> cylinderAmount;
 
-	cylinderCc = inputCc/cylinderAmount;
+	
 
 	std::vector<Cylinder> cylinders;
 	for(int i = 0; i < cylinderAmount;i++){
-		cylinders.push_back({cylinderCc,compression});
+		cylinders.push_back({(inputCc/cylinderAmount),compression});
 	}
 
 	std::cout << "Chose how rich mix '1' '2' '3'" << std::endl;
