@@ -1,4 +1,8 @@
 #pragma once
+#include <condition_variable>
+
+extern std::mutex conditionM;
+extern std::condition_variable condition;
 
 class Cylinder{
 public:
@@ -10,7 +14,6 @@ public:
 	void Ignition(int*);
 	void Push();
 	int cubiCentimeters;
-	int stroke;
 
 private:
 
