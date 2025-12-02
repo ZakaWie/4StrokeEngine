@@ -2,4 +2,4 @@
 
 #include "engine.h"
 
-void runCylinder(Cylinder*,float*,int*,int*);
+void runCylinder(Cylinder*,float*,int*,int*,int*);

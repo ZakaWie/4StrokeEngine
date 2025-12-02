@@ -24,11 +24,12 @@
 		std::cout << "airFuel: " << airFuel << std::endl;
 
 }
-	void Cylinder::Ignition(int* spark){
+	void Cylinder::Ignition(int* spark,int* rotation){
 
 		if(*spark == true){
 		exauhst = airFuel;
 		std::cout << "Boom" << std::endl;
+		rotation = rotation + 2;
 	}
 		airFuel = 0;
 }

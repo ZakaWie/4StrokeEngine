@@ -11,17 +11,17 @@ public:
 	
 	void Intake(float*);
 	void Compression();
-	void Ignition(int*);
+	void Ignition(int*,int*);
 	void Push();
 	int cubiCentimeters;
 
 private:
 
-	int exauhst;
+	int exauhst = 0;
 	
-	float airFuel;
-	float compression;
-	float air;
-	float fuel;
+	float airFuel = 0;
+	float compression = 0;
+	float air = 0;
+	float fuel = 0;
 
 };

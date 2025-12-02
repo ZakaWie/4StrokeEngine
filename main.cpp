@@ -31,6 +31,7 @@ int main(void){
 
 	int rpm;
 	int rotation = 0;
+//	int crankSpeed;
 
 	bool running = false;
 
@@ -79,18 +80,24 @@ int main(void){
 	}
 	std::vector<std::thread> runningCylinders;
 
-	for(unsigned i = 0; i < cylinders.size();i++){
-		std::thread c1(runCylinder,&cylinders[i],&inputFuel,&sparkPlugs[i],&cylinderStroke[i]);
+	for(int i = 0; i < cylinderAmount;i++){
+		std::thread c1(runCylinder,&cylinders[i],&inputFuel,&sparkPlugs[i],&cylinderStroke[i],&rotation);
 		runningCylinders.push_back(move(c1));
 	}
 
 	auto clockOuter {std::chrono::steady_clock::now()};
 	while(running){
-		rotation++;
 		fuelTank = fuelTank - inputFuel;
+		for(int i = 0;i < cylinderAmount;i++){
+			sparkPlugs[i] = 0;
+		}
 		for(unsigned i = 0;i<cylinders.size();i++){
-			if(cylinderStroke[i] < 3) cylinderStroke[i]++;
+			if(cylinderStroke[i] < 4) cylinderStroke[i]++;
 			else cylinderStroke[i] = 0;
+
+			if(cylinderStroke[i] == 3){
+				sparkPlugs[i] = 1;
+			}
 		}
 		std::lock_guard<std::mutex> threadlock(conditionM);
 		condition.notify_all();

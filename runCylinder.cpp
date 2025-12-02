@@ -2,7 +2,7 @@
 #include <chrono>
 
 #include "engine.h"
-void runCylinder(Cylinder* cylinder,float* inputFuel,int* spark,int* stroke){
+void runCylinder(Cylinder* cylinder,float* inputFuel,int* spark,int* stroke,int* rotation){
 	while(*inputFuel){
 
 		std::unique_lock<std::mutex> threadLock(conditionM);
@@ -20,7 +20,7 @@ void runCylinder(Cylinder* cylinder,float* inputFuel,int* spark,int* stroke){
 
 			case 2:
 			condition.wait(threadLock);
-			cylinder->Ignition(spark);
+			cylinder->Ignition(spark,rotation);
 			break;
 
 			case 3:
