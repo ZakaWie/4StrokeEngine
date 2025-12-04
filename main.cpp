@@ -86,8 +86,10 @@ int main(void){
 	}
 
 	auto clockOuter {std::chrono::steady_clock::now()};
+
 	while(running){
 		fuelTank = fuelTank - inputFuel;
+		if(rotation != 0) rotation--;
 		for(int i = 0;i < cylinderAmount;i++){
 			sparkPlugs[i] = 0;
 		}
@@ -99,9 +101,12 @@ int main(void){
 				sparkPlugs[i] = 1;
 			}
 		}
+
+		std::cout << "Rotation:" << rotation << std::endl;
+
 		std::lock_guard<std::mutex> threadlock(conditionM);
 		condition.notify_all();
-
+		
 		if(fuelTank <= 0){
 			inputFuel = 0;
 			break;
@@ -115,8 +120,9 @@ int main(void){
 			clockOuter = {std::chrono::steady_clock::now()};
 		}
 	}
-	for(int i = 0; i < cylinderAmount;i++){
-		runningCylinders[i].join();
+
+	for(int i = cylinderAmount-1; i >= 0;i--){
+		runningCylinders.at(i).join();
 	}
 	std::cout << "Out of fuel" << std::endl;
 	return 0;

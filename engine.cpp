@@ -29,9 +29,11 @@
 		if(*spark == true){
 		exauhst = airFuel;
 		std::cout << "Boom" << std::endl;
-		rotation = rotation + 2;
+		*rotation = *rotation + 2;
+
 	}
-		airFuel = 0;
+	else std::cout << "Missed fire timing" << std::endl;
+	airFuel = 0;
 }
 	void Cylinder::Push(){
 
